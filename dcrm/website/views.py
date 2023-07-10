@@ -32,6 +32,14 @@ def logout_user(request):
     messages.success(request, "Logged out...")
     return redirect('home')
 
+def contact(request):
+    records = Record.objects.all()
+    if request.user.is_authenticated:
+        return render(request, 'contact.html', {'records':records})
+    else:
+        messages.success(request, "You must be logged in to view records.")
+        return redirect('home')
+
 
 
 def customer_record(request, pk):
@@ -77,3 +85,6 @@ def update_record(request, pk):
     else:
         messages.success(request, "You must be logged in.")
         return redirect('home')
+    
+def deals(request):
+    return render(request, 'deals.html', {})

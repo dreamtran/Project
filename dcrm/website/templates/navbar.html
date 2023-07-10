@@ -10,7 +10,13 @@
 
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'add_record' %}">Add Record</a>
+            <a class="nav-link" href="{% url 'contact' %}">Contacts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_record' %}">Create contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'deals' %}">Deals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
