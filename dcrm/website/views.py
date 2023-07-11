@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import AddRecordForm
-from .models import Record
+from .forms import AddRecordForm, AddDealForm
+from .models import Record, Deal
 
-# Create your views here.
+
+
 
 def home(request):
     records = Record.objects.all()
-
+    deals = Deal.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -22,15 +23,14 @@ def home(request):
             messages.success(request, "Error. Please try again.")
             return redirect('home')
     else:
-        return render(request, 'home.html', {'records':records})
-
-
+        return render(request, 'home.html', {'records':records, 'deals':deals})
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, "Logged out...")
     return redirect('home')
+
 
 def contact(request):
     records = Record.objects.all()
@@ -50,6 +50,7 @@ def customer_record(request, pk):
         messages.success(request, "You must be logged in to view records.")
         return redirect('home')
 
+
 def delete_record(request, pk):
     if request.user.is_authenticated:
         delete_it = Record.objects.get(id=pk)
@@ -60,6 +61,7 @@ def delete_record(request, pk):
         messages.success(request, "You must be logged in to delete records.")
         return redirect('home')
     
+
 def add_record(request):
     form = AddRecordForm(request.POST or None)
     if request.user.is_authenticated:
@@ -73,6 +75,7 @@ def add_record(request):
         messages.success(request, "You must be logged in.")
         return redirect('home')
     
+
 def update_record(request, pk):
     if request.user.is_authenticated:
         current_record = Record.objects.get(id=pk)
@@ -86,5 +89,25 @@ def update_record(request, pk):
         messages.success(request, "You must be logged in.")
         return redirect('home')
     
-def deals(request):
-    return render(request, 'deals.html', {})
+
+def deal(request):
+    deals = Deal.objects.all()
+    if request.user.is_authenticated:
+        return render(request, 'deal.html', {'deals':deals})
+    else:
+        messages.success(request, "You must be logged in to view deals.")
+        return redirect('home')
+    
+
+def add_deal(request):
+    form1 = AddDealForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form1.is_valid():
+                add_deal = form1.save()
+                messages.success(request, "Added")
+                return redirect('deal')
+        return render(request, 'add_deal.html', {'form1':form1})
+    else:
+        messages.success(request, "You must be logged in.")
+        return redirect('home')
