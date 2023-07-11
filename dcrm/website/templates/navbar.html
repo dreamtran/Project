@@ -12,27 +12,30 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'contact' %}">Contacts</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'add_record' %}">Create contact</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'deal' %}">Deals</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'add_deal' %}">Create deal</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
+          
+          
 
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Login</a>
-          </li>
+          
           {% endif %}
           
         </ul>
-        
+        <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Login</a>
+          </li>
+          {% endif %}
+      </ul>
+      
       </div>
     </div>
   </nav>

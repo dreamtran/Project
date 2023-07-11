@@ -111,3 +111,37 @@ def add_deal(request):
     else:
         messages.success(request, "You must be logged in.")
         return redirect('home')
+    
+
+def deal_record(request, pk):
+    if request.user.is_authenticated:
+        deal_record = Deal.objects.get(id=pk)
+        return render(request, 'deal_record.html', {'deal_record':deal_record})
+    else:
+        messages.success(request, "You must be logged in to view records.")
+        return redirect('home')
+    
+
+def update_deal(request, pk):
+    if request.user.is_authenticated:
+        current_deal = Deal.objects.get(id=pk)
+        form1 = AddDealForm(request.POST or None, instance=current_deal)
+        if form1.is_valid():
+            form1.save()
+            messages.success(request, "Updated.")
+            return redirect('deal')
+        return render(request, 'update_deal.html', {'form1':form1})
+    else:
+        messages.success(request, "You must be logged in.")
+        return redirect('home')
+    
+
+def delete_deal(request, pk):
+    if request.user.is_authenticated:
+        delete_it = Deal.objects.get(id=pk)
+        delete_it.delete()
+        messages.success(request, "Deleted.")
+        return redirect('deal')
+    else:
+        messages.success(request, "You must be logged in to delete records.")
+        return redirect('deal')

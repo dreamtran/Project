@@ -49,13 +49,13 @@
               {% if deals %}
                   {% for deal in deals %}
                       <tr>
-                          <td>{{ deal.id }}</td>
-                          <td>{{ deal.deal_name }}</td>
-                          <td>{{ deal.pipeline }}</td>
-                          <td>{{ deal.deal_owner }}</td>
-                          <td>{{ deal.close_day }}</td>
-                          <td>{{ deal.amount }}</td>
-                          <td>{{ deal.created_at }}</td>
+                        <td><a href="{% url 'deal_record' deal.id %}">{{ deal.id }}</a></td>
+                        <td><a href="{% url 'deal_record' deal.id %}">{{ deal.deal_name }}</a></td>
+                        <td>{{ deal.pipeline }}</td>
+                        <td>{{ deal.deal_owner }}</td>
+                        <td>{{ deal.close_day }}</td>
+                        <td>{{ deal.amount }}</td>
+                        <td>{{ deal.created_at }}</td>
                           
                       </tr>    
                   {% endfor %}

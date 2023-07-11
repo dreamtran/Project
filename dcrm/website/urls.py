@@ -13,5 +13,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('deal/', views.deal, name='deal'),
     path('add_deal/', views.add_deal, name='add_deal'),
+    path('deal/<int:pk>', views.deal_record, name='deal_record'),
+    path('update_deal/<int:pk>', views.update_deal, name='update_deal'),
+    path('delete_deal/<int:pk>', views.delete_deal, name='delete_deal'),
 ]
 
