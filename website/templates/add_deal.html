@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'add_deal' %}">
+    {% csrf_token %}
+    {{ form1.as_p }}
+<br/>
+        <button type="submit" class="btn btn-secondary">Add</button>
+        <a href="{% url 'deal' %}" class="btn btn-secondary">Back</a>
+    </form>
+
+
+{% endblock %}

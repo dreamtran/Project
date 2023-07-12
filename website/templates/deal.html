@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+    
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Deal name</th>
+            <th scope="col">Pipeline</th>
+            <th scope="col">Deal owner</th>
+            <th scope="col">Close day</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+            {% if deals %}
+                {% for deal in deals %}
+                    <tr>
+                        <td><a href="{% url 'deal_record' deal.id %}">{{ deal.id }}</a></td>
+                        <td><a href="{% url 'deal_record' deal.id %}">{{ deal.deal_name }}</a></td>
+                        <td>{{ deal.pipeline }}</td>
+                        <td>{{ deal.deal_owner }}</td>
+                        <td>{{ deal.close_day }}</td>
+                        <td>{{ deal.amount }}</td>
+                        <td>{{ deal.created_at }}</td>
+                        
+                    </tr>    
+                {% endfor %}
+            {% endif %}
+
+          
+        </tbody>
+      </table>
+    
+
+{% else %}
+
+    <h1>Login</h1>
+    <br/>
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-secondary">Login</button>
+    </form>
+
+
+
+{% endif %}
+
+<br/>
+<a href="{% url 'add_deal' %}" class="btn btn-secondary">Create deal</a>
+
+{% endblock %}
