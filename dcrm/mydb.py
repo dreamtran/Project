@@ -1,4 +1,4 @@
-'''import mysql.connector
+import mysql.connector
 
 dataBase = mysql.connector.connect(
     host = 'localhost',
@@ -12,4 +12,4 @@ cursorObject = dataBase.cursor()
 
 cursorObject.execute("CREATE DATABASE db")
 
-print("Done!")'''
+print("Done!")
