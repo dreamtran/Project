@@ -1,6 +1,6 @@
 
 from pathlib import Path
-
+import MySQLdb
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -66,11 +66,10 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
-        'USER': 'root',
-        'PASSWORD': 'abcd1234',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'NAME': 'dreamtran$db',
+        'USER': 'dreamtran',
+        'PASSWORD': 'Amazonbasics',
+        'HOST': 'dreamtran.mysql.pythonanywhere-services.com',
     }
 }
 
